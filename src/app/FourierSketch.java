@@ -13,14 +13,15 @@ public class FourierSketch extends JPanel {
      */
     private static final long serialVersionUID = 1L;
     private Arm[] arms1, arms2;
-    private ArrayList<Point> fourierPoints;
+    private ArrayList<Point> fourierPoints1, fourierPoints2;
     private JFrame frame;
     private int width, height, padding, yOffset;
 
     public FourierSketch(Arm[] arms1, Arm[] arms2, int width, int height, int padding, int yOffset) {
         this.arms1 = arms1;
         this.arms2 = arms2;
-        fourierPoints = new ArrayList<Point>();
+        fourierPoints1 = new ArrayList<Point>();
+        fourierPoints2 = new ArrayList<Point>();
         this.width = width;
         this.height = height;
         this.padding = padding;
@@ -56,17 +57,22 @@ public class FourierSketch extends JPanel {
                 arms1[i+1].setParentArm(arms1[i]);
                 arms2[i+1].setParentArm(arms2[i]);
             } else {
-                Point fourierPoint = new Point(arms2[i].getEndPoint().x, arms1[i].getEndPoint().y);
-                fourierPoints.add(fourierPoint);
+                Point fourierPoint1 = new Point(arms1[i].getEndPoint().x, arms2[i].getEndPoint().y);
+                Point fourierPoint2 = new Point(arms2[i].getEndPoint().x, arms1[i].getEndPoint().y);
+                fourierPoints1.add(fourierPoint1);
+                fourierPoints2.add(fourierPoint2);
                 g2.setStroke(new BasicStroke(1));
-                g2.drawLine(arms1[i].getEndPoint().x, arms1[i].getEndPoint().y, fourierPoint.x, fourierPoint.y);
-                g2.drawLine(arms2[i].getEndPoint().x, arms2[i].getEndPoint().y, fourierPoint.x, fourierPoint.y);
+                g2.drawLine(arms1[i].getEndPoint().x, arms1[i].getEndPoint().y, fourierPoint1.x, fourierPoint1.y);
+                g2.drawLine(arms2[i].getEndPoint().x, arms2[i].getEndPoint().y, fourierPoint1.x, fourierPoint1.y);
+                g2.drawLine(arms1[i].getEndPoint().x, arms1[i].getEndPoint().y, fourierPoint2.x, fourierPoint2.y);
+                g2.drawLine(arms2[i].getEndPoint().x, arms2[i].getEndPoint().y, fourierPoint2.x, fourierPoint2.y);
             }
         }
 
-        for (Point p: fourierPoints) {
+        for (int i = 0; i < fourierPoints1.size(); i++) {
             g.setColor(Color.RED);
-            g2.drawOval(p.x, p.y, 1, 1);
+            g2.drawOval(fourierPoints1.get(i).x, fourierPoints1.get(i).y, 1, 1);
+            g2.drawOval(fourierPoints2.get(i).x, fourierPoints2.get(i).y, 1, 1);
         }
 
         repaint();

@@ -12,7 +12,7 @@ public class App {
         Point startPoint1 = new Point(padding + cumArmLength, (int) (0.5*height) + cumArmLength);
         Point startPoint2 = new Point((int) (0.5*width) + cumArmLength, padding + cumArmLength);
 
-        int numberOfArms = 5;
+        int numberOfArms = 3;
         int[] armLengths1 = partitionRandomly(cumArmLength, numberOfArms);
         int[] armLengths2 = partitionRandomly(cumArmLength, numberOfArms);
 
