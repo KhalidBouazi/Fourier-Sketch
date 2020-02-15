@@ -15,9 +15,10 @@ public class FourierSketch extends JPanel {
     private Arm[] arms1, arms2;
     private ArrayList<Point> fourierPoints1, fourierPoints2;
     private JFrame frame;
-    private int width, height, padding, yOffset;
+    private int width, height, padding, yOffset, k;
 
     public FourierSketch(Arm[] arms1, Arm[] arms2, int width, int height, int padding, int yOffset) {
+        k = 0;
         this.arms1 = arms1;
         this.arms2 = arms2;
         fourierPoints1 = new ArrayList<Point>();
@@ -40,6 +41,10 @@ public class FourierSketch extends JPanel {
 
     @Override 
     public void paintComponent(Graphics g) {
+
+        k++;
+        System.out.println(k);
+
         super.paintComponent(g);
         g.setColor(Color.BLACK);
         Graphics2D g2 = (Graphics2D) g;

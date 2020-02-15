@@ -47,17 +47,11 @@ public class Arm {
 
     public void drawArm(Graphics2D g) {
         turn();
-        Arm parent = parentArm;
 
+        Arm parent = parentArm;
         if (parent != null) {
             startPoint = parent.getEndPoint();
         }
-
-        /* while(parent != null) {
-            angle += parent.getAngle();
-            parent = parent.getParentArm();
-            System.out.println(parent == null);
-        } */
 
         Point endPoint = getEndPoint();
 
